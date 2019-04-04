@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace MonteCarloMethod
 {
-   struct Coordinates
+    public struct Coordinates
     {
+
         // Struct holds x, y
-        public double x;
-        public double y;
+        public double x { get; set; }
+        public double y { get; set; }
+
         // 2-Parameter constructor that takes new set of coords
         public Coordinates(double x, double y)
         {
@@ -26,14 +28,14 @@ namespace MonteCarloMethod
             this.y = random.NextDouble();
         }
 
-        // hypotenuse function
-        public double Function(double x, double y)
+        // hypotenuse
+        public double Hypotenuse()
         {
-            this.x = x;
-            this.y = y;
-            double hypotenuse = Math.Pow(x, 2) + Math.Pow(y, 2);
-            return Math.Sqrt(hypotenuse);
+            double hypotenuse = Math.Pow(this.x, 2) + Math.Pow(this.y, 2);
+            hypotenuse = Math.Sqrt(hypotenuse);
+            return hypotenuse;
         }
-    }
 
+
+    }
 }

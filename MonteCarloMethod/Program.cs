@@ -11,9 +11,7 @@ namespace MonteCarloMethod
     {
         static void Main(string[] args)
         {
-            Coordinates Coords = new Coordinates(0, 0);
             Random random = new Random();
-            Coordinates xyPairs = new Coordinates(random);
 
             Console.WriteLine("Welcome to the Monte Carlo method\n");
             Console.WriteLine("Select number amount to pass:");
@@ -22,26 +20,27 @@ namespace MonteCarloMethod
             int amount = int.Parse(Console.ReadLine());
             Console.Clear();
 
-            // counter
-            int counter = 0;
-            Console.WriteLine($"Overlap Amount:{counter}");
-            // array containing random coords
-            for (int i = 1; i <= amount; i++)
+            // array taking 1 parameter int
+            Coordinates[] coordinates = new Coordinates[amount];
+
+            // overlap and iteration counter
+            int overlap = 0;
+
+            for (int i = 0; i < amount; i++)
             {
-                // gives value to x & y
-                double hypotenuse = (xyPairs.Function(xyPairs.x, xyPairs.y));
+                coordinates[i] = new Coordinates(random);
+                double hypotenus = coordinates[i].Hypotenuse();
+                if (hypotenus <= 1)
+                {
+                    overlap++;
+                }
             }
+            double pointAverage = (overlap / (double)coordinates.Length) * 4;
+            double difference = Math.Abs(Math.PI - pointAverage);
 
-            // 2D array stores value
-            double[] coordPair = new double[] { hypotenuse };
-            foreach (double xy in coordPair)
-            {
-                Console.WriteLine(hypotenuse);
-            }
-
-
-
-
+            Console.WriteLine($"Number of Iterations: {amount}");
+            Console.WriteLine($"Pi Generated: {pointAverage}");
+            Console.WriteLine($"Actual Pi = {Math.PI:F4} Difference = {difference}");
         }
     }
 }
